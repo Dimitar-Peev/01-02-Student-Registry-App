@@ -5,7 +5,7 @@ on:
         branches: ["main"]
     pull_request:
         branches: ["main"]
-    workflow_dispatch: {} # 
+    workflow_dispatch: {} # Allow manual triggering of the workflow
 
 jobs:
     build-test:
@@ -18,7 +18,13 @@ jobs:
               with:
                   node-version: 24.x
                   cache: "npm"
-            - name: Install dependencies
+            - name: Install dependencies, build, and test
               run: npm install
+            - name: Run tests
+              run: npm test
+    security-tests:
+        needs: build-test
+        runs-on: ubuntu-latest
+        steps:
             - name: Run tests
               run: npm test
