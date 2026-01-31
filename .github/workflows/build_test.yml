@@ -38,7 +38,7 @@ jobs:
             - name: Install dependencies, build, and test
               run: npm install
             - name: Run security tests
-              run: npm audit --audit-level=moderate
+              run: npm audit
 
     deploy:
         if: github.ref == 'refs/heads/main'
